@@ -2,6 +2,11 @@ package cn.edu.guet.mvc;
 
 import com.google.gson.GsonBuilder;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,10 +43,11 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);// 检查输入请求是否为multipart表单数据。
         try {
             String uri = request.getRequestURI();
             uri = uri.substring(uri.indexOf("/", 1) + 1);
@@ -64,29 +70,46 @@ public class DispatcherServlet extends HttpServlet {
             }
             //获取的参数的值
             Object[] parameterValues = new Object[parameterType.length];
-            for (int i = 0; i < parameterType.length; i++) {
+
+            //判断表单类型！！！！！
+            if (isMultipart != true) {//表单不是multipart类型，即为form类型
+                for (int i = 0; i < parameterType.length; i++) {
+                    //System.out.println(parameterType[i].getTypeName());
+            /*
+            8种基本类型
+             */
+                    if (parameterType[i].isPrimitive()) {
+                        if (parameterType[i].getTypeName().equals("int")) {
+                            parameterValues[i] = Integer.parseInt(request.getParameter(paramterList.get(i)));
+                        }
                 /*
-                8种基本类型
+                 处理String类型
                  */
-                if (parameterType[i].isPrimitive()) {
-                    if (parameterType[i].getTypeName().equals("int")) {
-                        parameterValues[i] = Integer.parseInt(request.getParameter(paramterList.get(i)));
+                    } else if (ClassUtils.isAssignable(parameterType[i], String.class)) {
+                        parameterValues[i] = request.getParameter(paramterList.get(i));
+                    } else {//实体类
+                        //Bean
+                        Object pojo = parameterType[i].newInstance();
+                        //得到请求里所有的参数：Map<参数名, value>
+                        //获取表单里的数据
+                        Map<String, String[]> parameterMap = request.getParameterMap();
+                        //beanutils会自动将map里的key与bean的属性名进行反射赋值,注意数据接口名称要一致
+                        BeanUtils.populate(pojo, parameterMap);
+                        parameterValues[i] = pojo;
                     }
-                    /*
-                     处理String类型
-                     */
-                } else if (ClassUtils.isAssignable(parameterType[i], String.class)) {
-                    parameterValues[i] = request.getParameter(paramterList.get(i));
-                } else {//实体类
-                    //Bean
-                    Object pojo = parameterType[i].newInstance();
-                    //得到请求里所有的参数：Map<参数名, value>
-                    //获取表单里的数据
-                    Map<String, String[]> parameterMap = request.getParameterMap();
-                    //beanutils会自动将map里的key与bean的属性名进行反射赋值,注意数据接口名称要一致
-                    BeanUtils.populate(pojo, parameterMap);
-                    parameterValues[i] = pojo;
                 }
+            } else {//表单是multipart类型
+                    FileItemFactory factory = new DiskFileItemFactory();// 为该请求创建一个DiskFileItemFactory对象，通过它来解析请求。执行解析后，所有的表单项目都保存在一个List中。
+                    ServletFileUpload upload = new ServletFileUpload(factory);
+                    upload.setHeaderEncoding("UTF-8");
+                    List<FileItem> items = null;
+                    try {
+                        items = upload.parseRequest(request);
+                    } catch (FileUploadException e) {
+                        e.printStackTrace();
+                    }
+                    //有一个items就够了，因为它本身就是list
+                    parameterValues[0] = items;
             }
 
             Object obj = controllerMappingClass.newInstance();

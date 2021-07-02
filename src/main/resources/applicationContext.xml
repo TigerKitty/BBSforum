@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+	<bean id="AccountController" class="cn.edu.guet.controller.AccountController">
+		<property name="accountService" ref="accountService"></property>
+	</bean>
+	<bean id="accountService" class="cn.edu.guet.bll.impl.AccountServiceImpl"></bean>
+	<bean id="TreeController" class="cn.edu.guet.controller.TreeController">
+		<property name="treeDao" ref="treeDao"></property>
+	</bean>
+	<bean id="treeDao" class="cn.edu.guet.dao.impl.TreeDaoImpl"></bean>
+</beans>
