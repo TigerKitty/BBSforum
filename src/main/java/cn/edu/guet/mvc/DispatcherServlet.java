@@ -99,19 +99,23 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 }
             } else {//表单是multipart类型
-                    FileItemFactory factory = new DiskFileItemFactory();// 为该请求创建一个DiskFileItemFactory对象，通过它来解析请求。执行解析后，所有的表单项目都保存在一个List中。
-                    ServletFileUpload upload = new ServletFileUpload(factory);
-                    upload.setHeaderEncoding("UTF-8");
-                    List<FileItem> items = null;
-                    try {
-                        items = upload.parseRequest(request);
-                    } catch (FileUploadException e) {
-                        e.printStackTrace();
+                for(int i=0; i<parameterType.length;i++){
+                    if (ClassUtils.isAssignable(parameterType[i], String.class)) {
+                        parameterValues[i] = "D:\\IntelliJ IDEA 2019.2.4\\IdeaProject\\BBSforum\\src\\main\\webapp\\upload";
+                    }else{//图片类型
+                        FileItemFactory factory = new DiskFileItemFactory();// 为该请求创建一个DiskFileItemFactory对象，通过它来解析请求。执行解析后，所有的表单项目都保存在一个List中。
+                        ServletFileUpload upload = new ServletFileUpload(factory);
+                        upload.setHeaderEncoding("UTF-8");
+                        List<FileItem> items = null;
+                        try {
+                            items = upload.parseRequest(request);
+                        } catch (FileUploadException e) {
+                            e.printStackTrace();
+                        }
+                        parameterValues[i] = items;
                     }
-                    //有一个items就够了，因为它本身就是list
-                    parameterValues[0] = items;
+                }
             }
-
             Object obj = controllerMappingClass.newInstance();
             Object returnValue = method.invoke(obj, parameterValues);//调用方法处理请求即可
             if (returnValue != null && returnValue instanceof String) { //方法返回的是一个字符串类
@@ -131,6 +135,7 @@ public class DispatcherServlet extends HttpServlet {
                         .toJson(returnValue);
                 PrintWriter out = response.getWriter();
                 out.write(json);
+//                System.out.println(json);
                 out.flush();
                 out.close();
             }

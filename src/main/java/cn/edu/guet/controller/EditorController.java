@@ -6,22 +6,18 @@ import cn.edu.guet.mvc.annotaion.RequestMapping;
 import org.apache.commons.fileupload.FileItem;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class EditorController {
     @RequestMapping("html/upload-img.do")
-    public Map uploadimg(List<FileItem> items){
-        Map map = new HashMap();
+    public Map uploadimg(String realPath, List<FileItem> items){
+        Map<String,Object> map = new HashMap<>();
         System.out.println("到了上传文件的位置了！！！！！！");
-        String realPath = ("E:/upload");
         Travel travel = new Travel();
         Iterator<FileItem> itr = items.iterator();
-
-        while (itr.hasNext()) {
+        List<String> pathList = new ArrayList<>();
+        if (itr.hasNext()) {//每次只上传一张图片
             FileItem item = (FileItem) itr.next();
             // 检查当前项目是普通表单项目还是上传文件。
 //            if (item.isFormField()) {
@@ -43,19 +39,18 @@ public class EditorController {
                     e.printStackTrace();
                 }
                 System.out.println("savedFile.getAbsolutePath()"+savedFile.getAbsolutePath());
-                System.out.println("upload/pic/"+item.getName());
-                travel.setPic("upload/" + item.getName());
+                pathList.add("../upload/"+item.getName());
 //            }
             System.out.println("在这里把travel对象的信息存入数据库");
         }
-        // 把travel对象的信息存入数据库
-//            try {
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
-//            } catch (ServletException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        map.put("errno","0");
+        //这里用list纯属为了返回格式
+        List<Map> list = new ArrayList<>();
+        Map<String,String> remap = new HashMap<>();
+        remap.put("url",pathList.get(0));
+        list.add(remap);
+        map.put("data",list);
+//        System.out.println(map);
         return map;
     }
 }
