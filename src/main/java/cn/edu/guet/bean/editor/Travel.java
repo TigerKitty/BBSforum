@@ -2,26 +2,50 @@ package cn.edu.guet.bean.editor;
 
 public class Travel {
 
-    private int id;
-    private String title;
-    private String pic;
+  private String travelid;
+  private String travelurl;
+  private String travelalt;
+  private String travelhref;
 
-    public int getId() {
-        return id;
+    public String getTravelid() {
+        return travelid;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public void setTravelid(String travelid) {
+        this.travelid = travelid;
     }
-    public String getTitle() {
-        return title;
+
+    public String getTravelurl() {
+        return travelurl;
     }
-    public void setTitle(String title) {
-        this.title = title;
+
+    public void setTravelurl(String travelurl) {
+        this.travelurl = travelurl;
     }
-    public String getPic() {
-        return pic;
+
+    public String getTravelalt() {
+        return travelalt;
     }
-    public void setPic(String pic) {
-        this.pic = pic;
+
+    public void setTravelalt(String travelalt) {
+        this.travelalt = travelalt;
+    }
+
+    public String getTravelhref() {
+        return travelhref;
+    }
+
+    public void setTravelhref(String travelhref) {
+        this.travelhref = travelhref;
+    }
+
+    @Override
+    public String toString() {
+        return "Travel{" +
+                "travelid='" + travelid + '\'' +
+                ", travelurl='" + travelurl + '\'' +
+                ", travelalt='" + travelalt + '\'' +
+                ", travelhref='" + travelhref + '\'' +
+                '}';
     }
 }
