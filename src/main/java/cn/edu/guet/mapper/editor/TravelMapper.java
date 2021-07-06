@@ -12,4 +12,5 @@ import java.util.List;
 
 public interface TravelMapper {
     List<Travel> getAllTravel();
+    void insertTravel(Travel travel);
 }

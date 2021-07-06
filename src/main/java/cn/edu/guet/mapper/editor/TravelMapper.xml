@@ -4,4 +4,8 @@
 	<select id="getAllTravel" resultType="travel">
         SELECT * FROM travel
     </select>
+
+    <insert id="insertTravel" parameterType="travel">
+        INSERT INTO travel VALUES (#{travelid},#{travelurl},#{travelalt},#{travelhref})
+    </insert>
 </mapper>

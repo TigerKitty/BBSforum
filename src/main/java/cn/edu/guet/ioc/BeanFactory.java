@@ -28,6 +28,7 @@ public class BeanFactory {
     public static BeanFactory getInstance() {
         return instance;
     }
+    //通过类名获取实例
     public Object getBean(String id){
         return map.get(id);
     }

@@ -37,7 +37,10 @@ public class ContextConfigListener implements ServletContextListener {
             request：请求 session：会话 application：全局作用域
              */
             sce.getServletContext().setAttribute("cn.guet.web.controller", controllerMapping);
+            Class.forName("cn.edu.guet.ioc.BeanFactory");//把BeanFactory这个类加载到JVM中
         } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e){
             e.printStackTrace();
         }
     }
