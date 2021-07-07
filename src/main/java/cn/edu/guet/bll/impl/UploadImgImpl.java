@@ -9,7 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.io.File;
 import java.util.*;
-
+/**
+ * create by hzg 2021/07/05
+ * 图片的业务实现类
+ */
 public class UploadImgImpl implements UploadImg {
 
     @Override

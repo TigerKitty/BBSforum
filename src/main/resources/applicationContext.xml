@@ -4,7 +4,9 @@
 <!--	1.控制器-->
 	<bean id="EditorController" class="cn.edu.guet.controller.EditorController">
 		<property name="uploadImg" ref="UploadImgImpl"></property>
+		<property name="postBll" ref="PostBllImpl"></property>
 	</bean>
 <!--	这里写的是实现类，当实现类无法满足当前需求时，我们只需要改配置文件中的实现类，而不需要去真正的类里面改接口-->
 	<bean id="UploadImgImpl" class="cn.edu.guet.bll.impl.UploadImgImpl"></bean>
+	<bean id="PostBllImpl" class="cn.edu.guet.bll.impl.PostBllImpl"></bean>
 </beans>

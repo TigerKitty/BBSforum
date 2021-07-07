@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>发表帖子</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
     <script type="text/javascript" src="../../js/editor/writePost.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/editor/writePost.css"/>
 </head>
 <body>
-<div id="div1">
-    <p>div1</p>
-</div>
-<div id="div2">
-    <p>div2</p>
-</div>
-<button id="btn1" type="button">�ύ</button>
-<textarea id="text1" style="width:100%; height:200px;"></textarea>
+    <div id="body">
+        <span>主题</span>
+        <select id="selectType" name="type">
+            <option value="建党百年">建党百年</option>
+            <option value="红色家书">红色家书</option>
+            <option value="缅怀革命先烈">缅怀革命先烈</option>
+            <option value="中国近代史">中国近代史</option>
+        </select>
+        <span>标题</span>
+        <input id="title" type="text" name="title" placeholder="请输入标题">
+        <div id="div1"></div>
+        <button id="submit" class="button" type="button">发表帖子</button>
+        <button id="draft" class="button" type="button">保存草稿</button>
+        <textarea id="text"></textarea>
+    </div>
 </body>
 </html>
