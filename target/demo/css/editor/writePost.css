@@ -1,0 +1,68 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+span{
+    margin: 3px;
+}
+/*外部盒子*/
+#body{
+    position: absolute;
+    height: 100%;
+    weight: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #FFFFE0;
+}
+#div1,#selectType,#title,#text,.button{
+    position: relative;
+}
+/*书写部分*/
+#div1{
+
+    margin-top: 1%;
+    margin-left: 1%;
+    width:98%
+}
+/*选择主体下拉框*/
+#selectType{
+
+    margin-top: 1%;
+    height:28px;
+    width:180px;
+    padding-left: 30px;
+    outline: none;
+    font-size: 15px;
+    border-color: antiquewhite;
+}
+/*文章题目*/
+#title{
+
+    margin-top: 1%;
+    height:25px;
+    width:230px;
+}
+/*获取帖子内容*/
+#text{
+
+    /*display: none;*/
+    width:100%;
+    height:200px;
+}
+.button {
+
+    border: 2px solid #FF4500;
+    background-color: transparent;
+    color: #FF4500;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 256ms all;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #FF4500;
+    color: #fff;
+}

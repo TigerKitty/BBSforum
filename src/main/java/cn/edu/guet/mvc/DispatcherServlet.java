@@ -1,5 +1,6 @@
 package cn.edu.guet.mvc;
 
+import cn.edu.guet.ioc.BeanFactory;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -116,7 +117,9 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 }
             }
-            Object obj = controllerMappingClass.newInstance();
+            //这里就不能自己创建了，因为我们将类中的new都去除了，只有从工厂里面的实体才完整，所以要从工厂里面取
+//            Object obj = controllerMappingClass.newInstance();
+            Object obj = BeanFactory.getInstance().getBean(controllerMappingClass.getSimpleName());
             Object returnValue = method.invoke(obj, parameterValues);//调用方法处理请求即可
             if (returnValue != null && returnValue instanceof String) { //方法返回的是一个字符串类
                 String path = returnValue.toString();

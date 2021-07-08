@@ -1,15 +1,15 @@
 package cn.edu.guet.util;
 
-import cn.edu.guet.filter.ConnectionFilter;
+import cn.edu.guet.filter.SqlsessionFilter;
+import org.apache.ibatis.session.SqlSession;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * 在Controller层中声明即可
+ * 动态代理实现事务处理
  */
 public class TransactionHandler implements InvocationHandler {
     private Object targetObject;//目标类
@@ -23,20 +23,20 @@ public class TransactionHandler implements InvocationHandler {
     }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Connection conn = ConnectionFilter.getConn();
+        SqlSession sqlSession = SqlsessionFilter.getSqlsession();
         Object retVal = null;
         try{
-            System.out.println("Service:"+conn.hashCode());
+            System.out.println("Service:"+sqlSession.hashCode());
             String methodName = method.getName();
             if(methodName.startsWith("delete") || methodName.startsWith("insert") || methodName.startsWith("update")){
-                conn.setAutoCommit(false);
+                sqlSession.getConnection().setAutoCommit(false);
                 retVal=method.invoke(targetObject,args);
-                conn.commit();
+                sqlSession.getConnection().commit();
             }else {
                 retVal = method.invoke(targetObject,args);
             }
         }catch (SQLException e){
-            conn.rollback();
+            sqlSession.getConnection().rollback();
         }
         return retVal;
     }

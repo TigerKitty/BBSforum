@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这里记得获取文章标题来处理</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js"></script>
+    <script type="text/javascript" src="../../js/editor/lookPost.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/editor/lookPost.css"/>
+</head>
+<body>
+<div id="under">
+<div id="outer">
+    <div id="head">
+        <div id="head1">
+            <a id="a1" href="#">首页</a> <span>></span> <a id="a2" href="#">建党百年</a> <span>></span> <a id="a3" href="#">全面建成小康社会背后的故事</a>
+        </div>
+        <div id="head2">
+            <button id="submitPost">发帖</button>
+            <button id="toDiscuss"><a href="#bottom">评论</a></button>
+        </div>
+    </div>
+    <div id="head3">
+        <span id="typeMes"></span>
+        <span id="titleMes"></span>
+        <a href="#" id="buttonCopy">[复制链接]</a>
+        <span id="timeMes">发表于</span>
+    </div>
+<!--    页面主题，显示帖子内容-->
+    <div id="body">
+        <div id="personMes">
+            <img id="perMesPic" src="../../images/pic.png"><br>
+            <span class="perMes">姓名: </span>
+            <span id="perMesName" class="perMes"></span><br>
+            <span class="perMes">组织: </span>
+            <span id="perMesGroup" class="perMes">第三党支部</span><br>
+            <span class="perMes">专业: </span>
+            <span id="perMesMajor" class="perMes"></span><br>
+            <span class="perMes">学院: </span>
+            <span id="perMesCollege" class="perMes"></span>
+        </div>
+        <div id="post">
+            <img src="../../upload/毕加索-格尔尼卡.jpg" style="max-width:100%;" contenteditable="false"/>
+        </div>
+    </div>
+<!--    评论书写区-->
+    <div id="discussBox">
+        <div id="discuss"></div>
+        <button id="submitDiscuss" type="submit" value="发表评论">发表评论</button>
+    </div>
+    <textarea id="text1"></textarea>
+<!--    评论显示区-->
+    <div id="discussMes">
+        <table>
+            <tr>
+                <td><img src="../../images/pic.png"></td>
+                <td>这里是我发的评论</td>
+            </tr>
+        </table>
+    </div>
+</div>
+    <div id="buttom"></div>
+</div>
+<!--获取url中的参数-->
+<script>
+    var args=new Object();
+    var query=location.search.substring(1);//获取查询串
+    var pairs=query.split(",");//在逗号处断开
+    for(var i=0;i<pairs.length;i++){
+        var pos=pairs[i].indexOf('=');//查找name=value
+        if(pos==-1){//如果没有找到就跳过
+            continue;
+        }
+        var argname=pairs[i].substring(0,pos);//提取name
+        var value=pairs[i].substring(pos+1);//提取value
+        args[argname]=unescape(value);//存为属性
+    }
+    // console.log("pid:"+args.pid);
+</script>
+</body>
+</html>
