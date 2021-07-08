@@ -4,7 +4,7 @@
 	<!-- 为 JavaBean 起类别名 -->
 	<typeAliases>
 		<!-- 指定一个包名起别名，将包内的 Java 类的类名作为类的类别名 -->
-		<package name="cn.edu.guet.bean.editor" />
+		<package name="cn.edu.guet.bean" />
 	</typeAliases>
        <!-- 配置 mybatis 运行环境 -->
     <environments default="development">
@@ -24,6 +24,6 @@
     </environments>
 	<mappers>
 		<!-- 通过 mapper 接口包加载整个包的映射文件 -->
-		<package name="cn.edu.guet.mapper.editor" />
+		<package name="cn.edu.guet.mapper" />
 	</mappers>
 </configuration>
