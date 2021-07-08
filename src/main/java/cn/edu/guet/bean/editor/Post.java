@@ -2,14 +2,32 @@ package cn.edu.guet.bean.editor;
 
 public class Post {
     private String pid;
+    private String userid;
     private String ptitle;
     private String ptime;
     private String ptype;
     private String pcontent;
     private String pstatus;
+    private String upstatus;
 
     public String getPid() {
         return pid;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getUpstatus() {
+        return upstatus;
+    }
+
+    public void setUpstatus(String upstatus) {
+        this.upstatus = upstatus;
     }
 
     public void setPid(String pid) {
@@ -60,11 +78,13 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "pid='" + pid + '\'' +
+                ", userid='" + userid + '\'' +
                 ", ptitle='" + ptitle + '\'' +
                 ", ptime='" + ptime + '\'' +
                 ", ptype='" + ptype + '\'' +
                 ", pcontent='" + pcontent + '\'' +
                 ", pstatus='" + pstatus + '\'' +
+                ", upstatus='" + upstatus + '\'' +
                 '}';
     }
 }

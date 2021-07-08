@@ -1,8 +1,5 @@
 package cn.edu.guet;
 
-import cn.edu.guet.bean.editor.Travel;
-import cn.edu.guet.filter.SqlsessionFilter;
-import cn.edu.guet.mapper.editor.TravelMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -25,14 +22,6 @@ public class Test {
             InputStream in=Class.forName("cn.edu.guet.Test").getResourceAsStream("/mybatis-config.xml");
             sqlSessionFactory= new SqlSessionFactoryBuilder().build(in);
             sqlSession=sqlSessionFactory.openSession();
-    }
-        @org.junit.Test
-        public void testGetAllTravel(){
-        TravelMapper travelMapper=sqlSession.getMapper(TravelMapper.class);//生成一个代理对象
-        List<Travel> list=travelMapper.getAllTravel();
-        for (Travel t:list){
-            System.out.println(t);
-        }
     }
 
 //    @org.junit.Test

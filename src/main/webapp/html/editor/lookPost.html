@@ -21,27 +21,26 @@
         </div>
     </div>
     <div id="head3">
-        <span>【建党百年】全面建成小康社会背后的故事【商学院第三党支部-雷斌】</span>
+        <span id="typeMes"></span>
+        <span id="titleMes"></span>
         <a href="#" id="buttonCopy">[复制链接]</a>
-        <span>发表于2020-5-19 18:04:27</span>
+        <span id="timeMes">发表于</span>
     </div>
 <!--    页面主题，显示帖子内容-->
     <div id="body">
         <div id="personMes">
             <img id="perMesPic" src="../../images/pic.png"><br>
-            <span class="perMes">UID: </span>
-            <span class="perMes">3210</span><br>
             <span class="perMes">姓名: </span>
-            <span class="perMes">黄志国</span><br>
+            <span id="perMesName" class="perMes"></span><br>
             <span class="perMes">组织: </span>
-            <span class="perMes">第三党支部</span><br>
+            <span id="perMesGroup" class="perMes">第三党支部</span><br>
             <span class="perMes">专业: </span>
-            <span class="perMes">信息管理信息系统</span><br>
+            <span id="perMesMajor" class="perMes"></span><br>
             <span class="perMes">学院: </span>
-            <span class="perMes">商学院</span>
+            <span id="perMesCollege" class="perMes"></span>
         </div>
         <div id="post">
-            <p>这里是帖子的具体内容</p>
+            <img src="../../upload/毕加索-格尔尼卡.jpg" style="max-width:100%;" contenteditable="false"/>
         </div>
     </div>
 <!--    评论书写区-->
@@ -55,12 +54,28 @@
         <table>
             <tr>
                 <td><img src="../../images/pic.png"></td>
-                <td>尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性尿性</td>
+                <td>这里是我发的评论</td>
             </tr>
         </table>
     </div>
 </div>
     <div id="buttom"></div>
 </div>
+<!--获取url中的参数-->
+<script>
+    var args=new Object();
+    var query=location.search.substring(1);//获取查询串
+    var pairs=query.split(",");//在逗号处断开
+    for(var i=0;i<pairs.length;i++){
+        var pos=pairs[i].indexOf('=');//查找name=value
+        if(pos==-1){//如果没有找到就跳过
+            continue;
+        }
+        var argname=pairs[i].substring(0,pos);//提取name
+        var value=pairs[i].substring(pos+1);//提取value
+        args[argname]=unescape(value);//存为属性
+    }
+    // console.log("pid:"+args.pid);
+</script>
 </body>
 </html>

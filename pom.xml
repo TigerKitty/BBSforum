@@ -86,6 +86,11 @@
       <artifactId>mybatis</artifactId>
       <version>3.5.3</version>
     </dependency>
+    <dependency>
+    <groupId>com.github.binarywang</groupId>
+    <artifactId>java-emoji-converter</artifactId>
+    <version>0.0.1</version>
+    </dependency>
   </dependencies>
 
   <build>

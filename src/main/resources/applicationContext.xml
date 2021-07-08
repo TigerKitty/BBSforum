@@ -3,10 +3,14 @@
 <beans>
 <!--	1.控制器-->
 	<bean id="EditorController" class="cn.edu.guet.controller.EditorController">
+<!--		name必须跟类中对应的实体名一样否则无法映射，同样的ref也必须跟id一样-->
 		<property name="uploadImg" ref="UploadImgImpl"></property>
 		<property name="postBll" ref="PostBllImpl"></property>
 	</bean>
 <!--	这里写的是实现类，当实现类无法满足当前需求时，我们只需要改配置文件中的实现类，而不需要去真正的类里面改接口-->
 	<bean id="UploadImgImpl" class="cn.edu.guet.bll.impl.UploadImgImpl"></bean>
-	<bean id="PostBllImpl" class="cn.edu.guet.bll.impl.PostBllImpl"></bean>
+	<bean id="PostBllImpl" class="cn.edu.guet.bll.impl.PostBllImpl">
+		<property name="postBean" ref="Post"></property>
+	</bean>
+	<bean id="Post" class="cn.edu.guet.bean.editor.Post"></bean>
 </beans>
